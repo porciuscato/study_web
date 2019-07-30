@@ -1,0 +1,46 @@
+div {
+  height:100px;
+  width: 100px;
+  background-color: paleturquoise;
+  line-height: 100px;
+  text-align: center;
+  color: #ffffff
+}
+
+.box3 {
+  background-color: rgb(212, 152, 162);
+}
+
+.relative {
+  position:relative;
+  left: 100px;
+  z-index: 10;
+}
+
+.box1 {
+  background-color: gainsboro;
+}
+
+.box2 {
+  background-color: paleturquoise;
+}
+
+.box4 {
+  background-color: skyblue;
+  
+}
+
+.absolute {
+  position: absolute;
+  left:108px;
+  top:108px;
+}
+
+.box5 {
+  background-color: peru;
+}
+
+.fixed {
+  position:fixed;
+  top:108px;
+}

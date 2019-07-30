@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="01_box_model.css">
+</head>
+<body style="background-image: url('http://i.stack.imgur.com/vhoa0.jpg')">
+  <div class="hidden">
+    얘는 안 보일 뿐입니다...
+  </div>
+  <div class="none">
+    얘는 곧 사라집니다....
+  </div>
+
+  <!-- p 태그는 margin의 default가 16이지만 div는 없다. -->
+  <!-- 자동완성: .inline-block -->
+  <div class="inline-block">
+    인라인 블럭
+  </div>
+  <span>인라인 바로 옆에</span>
+  <div id="zero">
+      공간0
+    </div>
+  <div class="odd">
+    공간1
+  </div>
+  <!-- <p>p태그</p>
+  <p>이런 다른 p태그 입니다.</p> -->
+  <!-- p 태그의 margin이 서로 겹쳐있다. 그래서 p보다 div 태그를 쓴다. -->
+  <div class="even">
+    <p>내용을 <a href="">중간 사이에 낀 블락</a> 과 같습니다.</p>
+  </div>
+  <div>
+    공간2
+  </div>
+  <div class="odd">
+    공간3
+  </div>
+  <div class="even">
+    공간4
+  </div>
+</body>
+</html>

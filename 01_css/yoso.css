@@ -1,0 +1,47 @@
+.section {
+  border: 1px solid black;
+  display: block;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  width: 20px;
+  height: 20px;
+}
+
+.b1 {
+  background-color:pink;
+  position:absolute;
+}
+
+.b2 {
+  background-color: blue;
+  position:absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.b3 {
+  background-color: green;
+  position:absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.b4 {
+  background-color: red;
+  position:absolute;
+  top: 80px;
+  left: 80px
+}
+
+.b5 {
+  background-color: goldenrod;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}

@@ -1,0 +1,47 @@
+.big-box {
+  width: 500px;
+  height: 500px;
+  border: solid 5px;
+  position: relative;
+  margin-left: 200px;
+  margin-right: auto;
+}
+
+.small-box{
+  width: 100px;
+  height: 100px;
+}
+
+#pink {
+  background-color:pink;
+  position: absolute;
+}
+
+#blue {
+  background-color:blue;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+
+}
+
+#red {
+  background-color:red;
+  position: absolute;
+  left: 400px;
+  top: 400px;
+}
+
+#green {
+  background-color:green;
+  position: absolute;
+  left: 200px;
+  top: 200px;
+}
+
+#yellow {
+  background-color:yellow;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+}

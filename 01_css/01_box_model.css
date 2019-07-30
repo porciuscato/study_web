@@ -1,0 +1,110 @@
+/* 공간은 남아있지만 컨텐츠만 사라진 것 */
+.hidden {
+  visibility: hidden;
+}
+
+/* 아예 사라지게 만든다. */
+.none{
+  display: None;
+}
+
+
+/* 아까는 이름표를 붙이는 거였지만 */
+.inline-block{
+  display: inline-block;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+/* div {
+  margin-top: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px
+  위아래 좌우를 주려면 이렇게 하면 된다.
+  margin: 30px 0px;
+  
+  margin: 10px 20px 30px; 
+  margin 이후 주는 인자의 개수에 따라 다르다. 
+
+  margin-left: auto;
+  margin-right:auto;
+  margin-top:auto;
+  margin-bottom:auto;
+
+  padding도 조절 가능하다. 
+  padding: 5px 20px; 
+
+
+  border
+  border는 width, style, color가 함께 간다.
+  속성과 값을 묶어서 전달할 수 있다.
+  충분히 이쁜 border들을 만들 수 있다.
+
+  margin: 5px;
+  padding: 10px;
+  border-width: 10px 20px 30px 40px;
+  border-style: solid dotted dashed double;
+  border-color: greenyellow pink gold silver; 
+  위의 명령어를 줄일 수 있다.
+
+  세 가지 인자의 순서를 따라야 한다. style은 필수다
+  border: 2px solid goldenrod;
+  
+
+
+  가장 중요한 건 !!!display!!!
+  display: None;
+  가장 중요한 기능은 길막. inline 요소들을 외우고 있는 것이 편함
+} */
+
+
+
+
+
+/* div {
+  height:100px;
+  width:100px;
+  margin-left:auto;
+  margin-right:auto;
+  display:inline;
+  display:block;
+} */
+
+
+/* 
+이같은 inline 태그는 상하로는 설정이 불가하지만 좌우 로는 설정이 가능하다.
+ a {
+   margin-left: 10px;
+   margin-right: 10px;
+   line-height는 컨텐츠의 크기를 키워주는 효과
+   line-height: 50px;
+ }
+ */
+
+
+div {
+  background-color: burlywood;
+  height:100px;
+  width:100px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align: center;
+  line-height: 100px;
+  letter-spacing: 1px;
+}
+
+/* id 태그는 #을 붙인다. */
+#zero {
+  background-color: yellowgreen
+}
+
+/* 클래스 셀렉터. 앞에 dot를 찍어야 함.*/
+.odd {
+  background-color: blanchedalmond;
+}
+
+.even {
+  background-color: honeydew
+}
