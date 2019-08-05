@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+section ul {
+  margin: 10px 0px;
+}
+
+section > ul > li {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+a + ul {
+  background-color: gold;
+}
+
+a ~ ul {
+  border:solid darkgray;
+}
+
+/* 속성 셀렉터 */
+
+a[target='_blank'] {
+  border: solid 2px black;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+ul[class] > li {
+  width: 20%;
+  height: 50px;
+  display: inline-block;
+}
+
+.you {
+  font-size: 20px;
+  color: red;
+}
+
+/*
+img[alt$="TYPE"]{
+
+}
+
+img[alt~="TYPE"]{
+  
+}
+
+img[alt^="TYPE"]{
+  
+}
+*/
+
