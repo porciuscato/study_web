@@ -57,4 +57,9 @@
 
 2. index.html을 만들어서 올린다.
 
-3. 
+3. url 치는 부분에 porciuscato.github.io를 입력하면 들어갈 수 있다.
+
+
+
+
+
