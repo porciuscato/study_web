@@ -74,4 +74,91 @@ ctl shit p - > open settings(json)
 
 -  http://overapi.com/html
   - 여기 가면 태그들 다 나와있음
+-  style
+
+```html
+<style>
+  body {
+  }
+  .class {
+  }
+  #id {
+  }
+</style>
+```
+
+- div
+
+```html
+<div class="shadowbox">
+  <p>Here's a very interesting note displayed in a
+  lovely shadowed box.</p>
+</div>
+```
+
+```CSS
+.shadowbox {
+  width: 15em;
+  border: 1px solid #333;
+  box-shadow: 8px 8px 5px #444;
+  padding: 8px 12px;
+  background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+}
+```
+
+- h1, h2, h3, h4, h5, h6
+
+- p
+
+- br : line break(inline)
+
+- hr : horizontal line
+
+- map: 이미지에 특정 링크를 연결시킬 수 있다. / area 태그. 
+
+  ```html
+  <map name="infographic">
+    <area shape="poly" coords="130,147,200,107,254,219,130,228" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" alt="HTML" />
+    <area shape="poly" coords="130,147,130,228,6,219,59,107" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" alt="CSS" />
+    <area shape="poly" coords="130,147,200,107,130,4,59,107" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" alt="JavaScript" />
+  </map>
+  <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info2.png" alt="MDN infographic" />
+  ```
+
+  ```css
+  <style>
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 232px;
+  }
+  </style>
+  ```
+
+  ```html
+  <map name="infographic">
+    <area shape="rect" coords="184,6,253,27" href="https://mozilla.org" target="_blank" alt="Mozilla" />
+    <area shape="circle" coords="130,136,60" href="https://developer.mozilla.org/" target="_blank" alt="MDN" />
+    <area shape="poly" coords="130,6,253,96,223,106,130,39" href="https://developer.mozilla.org/docs/Web/Guide/Graphics" target="_blank" alt="Graphics" />
+    <area shape="poly" coords="253,96,207,241,189,217,223,103" href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" alt="HTML" />
+    <area shape="poly" coords="207,241,54,241,72,217,189,217" href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" alt="JavaScript" />
+    <area shape="poly" coords="54,241,6,97,36,107,72,217" href="https://developer.mozilla.org/docs/Web/API" target="_blank" alt="Web APIs" />
+    <area shape="poly" coords="6,97,130,6,130,39,36,107" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" alt="CSS" />
+  </map>
+  <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png" alt="MDN infographic" />
+  ```
+
+  ```css
+  <style>
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 248px;
+  }
+  </style>
+  ```
+
+  
 
