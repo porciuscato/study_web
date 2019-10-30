@@ -166,8 +166,10 @@ a != b // false
     const result = Math.PI > 4 ? '네' : '아니오'
 
 - 사용자 입력 받기
+  
   - `prompt()`
 - 사용자에게 출력
+  
   - `alert()`
 
 
@@ -188,6 +190,10 @@ a != b // false
   // 함수를 넣어주는 형식 map과 비슷: map(int, [])
   menus.forEach(function(menu) {
   	console.log(menu)
+  })
+  
+  menus.forEach(menu => {
+      console.log(menu)
   })
   ```
 
@@ -492,4 +498,133 @@ eventlistenr
       })
     </script>
 ```
+
+
+
+
+
+
+
+Single Page Application
+
+장고처럼 view함수 호출 없이 한 페이지에서 실행됨
+
+
+
+Giphy Developer
+
+입력값을 Giphy API로 보내서 화면에 띄운다.
+
+
+
+네트워크 공부
+
+```
+cmd
+tracert 8.8.8.8 (trace router라는 뜻)
+coursera network(Grow with Google) - the bits and bytes of computer networking
+```
+
+
+
+
+
+```javascript
+GiphyAPICall.open()
+GiphyAPICall.send()
+```
+
+
+
+
+
+#### JS의 async
+
+----
+
+- JS는 싱글 스레드 언어가 아닌 멀티 스레드 언어다.
+- 다만 async 함수가 있을 뿐이다. (언어가 만든 것)
+
+---
+
+1. 어떻게 함수가 선언되기도 전에 사용될 수 있는가?
+
+   async
+
+   ```javascript
+   const nothing = () => {}
+   console.log('start')
+   // 시간을 멈춰두는 것. 파이썬은 sleep()
+   // 첫번째 인자는 함수, 두 번째 인자는 ms
+   setTimeout(nothing, 3000)
+   console.log('end')
+   ```
+
+   그냥 봐서는 start -> 3초후 -> end 같은데, 오히려 start -> end -> 3초 이렇게 작동함
+
+   그 이유는??
+
+   파이썬은 synchronous and blocking 하는데... 즉 코드가 순차적으로 시행된다. 코드가 순차적으로 작동하는 이유는 blocking 이기 때문, 즉 한 코드의 시행이 끝나야 다음 코드가 진행된다.
+
+   그러나 JS는 그렇지 않다.
+
+   => 이런 성질 때문에 동기적이지 못하다 -> asynchronous. 그 이유는 언어가 non-blocking이기 때문이다.
+
+   원래는 언어가 코드 진행을 막아야하는데 이 언어는 그렇지 않다.
+
+   이는 JS가 브라우저를 조작하는 언어이기 때문이다?
+
+   만약 JS가 파이썬과 같이 동기적으로 움직인다면....
+
+   -> 실험을 위한 코드: while() : 코드 진행을 막을 수 있다.
+
+   ```javascript
+   // 일단은 시간을 확인하는 코드
+   const now = new Date()
+   ```
+
+   ```javascript
+   const sleep = sec => {
+   	const startTime = new Date().getTime()
+   	while(Date().getTime() - startTime < sec * 1000){}
+   }
+   ```
+
+   => 동기적이게 되면 이 함수가 끝나기 전까지 우리는 아무것도 할 수가 없다.
+
+   예전에는 브라우저가 싱글 스레드였다. (지금은 multithread. 여러 명이 일하는 구조)
+
+   그래서 JS 코드 중에 종료를 예측할 수 없는, 시간이 오래 걸리는, 확정되지 않은 작업들이 있으면 `asynchronous` 하게 작동하도록 만들었다.
+
+   -> 주문만 받아놓고 다음 손님을 받는다. 일단은 요청을 받고 어딘가에 쌓아놓는다.(이것이 `callstack`). eventloop
+
+   일반적인 언어의 synchronous와 blocking을 하지 말고, 완료되는 시점에 따라 시행되도록 언어를 구성했다.
+
+   그렇다면 자바스크립트는 비동기적 언어다? 
+
+   `아니다!! 그렇다고 지 맘대로 아무 순서대로 시행되는 것이 아니다. 동기적으로 시행이 되지만, 부분적으로 비동기적으로 작동한다.`
+
+   =>> async 하게 구현된 함수들이 있다!!
+
+   ex) setTimeout -> async한 함수이기 때문에 callback에 담아두고 일단은 다음 코드를 실행한다. 그리고 완료가 되면 결과를 보여준다. 
+
+   eventloop라는 것이 있어서 여기에 스택처럼 쌓이지만 스택은 아니다. 
+
+    http://latentflip.com/loupe/?code=ZnVuY3Rpb24gcHJpbnRIZWxsbygpIHsNCiAgICBjb25zb2xlLmxvZygnSGVsbG8gZnJvbSBiYXonKTsNCn0NCg0KZnVuY3Rpb24gYmF6KCkgew0KICAgIHNldFRpbWVvdXQocHJpbnRIZWxsbywgMzAwMCk7DQp9DQoNCmZ1bmN0aW9uIGJhcigpIHsNCiAgICBiYXooKTsNCn0NCg0KZnVuY3Rpb24gZm9vKCkgew0KICAgIGJhcigpOw0KfQ0KDQpmb28oKTs%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D 
+
+   => 이런 특성이 지금은 복잡해 보이지만.... 웹서버를 구축할 때 빛을 발한다. 
+
+   장고를 배포하려면 많은 엔진을 붙여야 한다... 멀티 스레드를 직접 구축해야 한다. 그러나 자바스크립트는 배포하기가 정말 편하다! 언어 자체가 그렇게 만들어졌기 때문이다!
+
+   자바스크립트가 하나의 싱글 스레드가 아니다! 내부적으로는 멀티 스레드다. 진행되는 방식이 싱글 스레드처럼 보인다. (실행 context가 single thread) -> 언어단 자체에서 멀티 스레드를 만들어줬기 때문에, 우리는 그 밑단을 신경쓸 필요가 없으니! 초반에는 cost가 커 보이지만 후반에는 더 좋다는 것....
+
+
+
+2. 밑에서 정의된 것들이 왜 위에서도 작동하는가?
+
+   -> addEventListener는 아주 대표적인 async 함수다! 
+
+   우리가 병렬적으로 정의한 것이 아니라, 
+
+   
 
