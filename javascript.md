@@ -1,3 +1,7 @@
+++ 호주 seek
+
+++ 김용균
+
 ctrol + shift + j 로 자바스크립트를 컨트롤
 
 ```javascript
@@ -549,7 +553,7 @@ GiphyAPICall.send()
 
 1. 어떻게 함수가 선언되기도 전에 사용될 수 있는가?
 
-   async
+   async ex) `settimeout`, `xmlhttprequest`, `fs.readFile`, `fs.writeFile`
 
    ```javascript
    const nothing = () => {}
@@ -627,4 +631,128 @@ GiphyAPICall.send()
    우리가 병렬적으로 정의한 것이 아니라, 
 
    
+
+=> 3. 그러면 Async를 어떻게 처리할 것인가?
+
+- 1) `callback` 으로 처리
+- 2) `promise` 객체로 처리 -> 우린 주로 이걸 사용할 예정?
+- 3) `async wait` 
+
+=> 이런 함수들은 파일 입출력과 관련된 것들이 많다. (파일들은 멀리 있기 때문에 )
+
+- 비동기적 함수들은 다음과 같이 생긴 경우가 많다.
+
+  - `비동기함수 ( , function)`
+
+  ```javascript
+  const fs = require('fs')
+  
+  let content = ''
+  
+  content = fs.readFile('me2.json', () => {
+      console.log('파일 읽기')
+  })
+  
+  console.log(content)
+  ```
+
+  => content는 
+
+- 그래서 비동기 함수들은 **callback** 함수를 인자로 받는다.
+
+  - 함수가 끝난 이후에 할 것들을 정의해주면 된다. ex) 이벤트리스너 처럼 특정 일이 발생했을 때 특정 함수를 수행하듯 만들어준다.
+
+  ```javascript
+  const fs = require('fs')
+  
+  // data는 파일을 불러온 결과다.
+  fs.readFile('me2.json', (err, data) => {
+      // console.log('파일 읽기')
+      console.log(JSON.parse(data))
+  })
+  ```
+
+  ```javascript
+  fs.readFile('me2.json', (err, data) => {
+      // console.log('파일 읽기')
+      setTimeout(() => {
+          console.log(JSON.parse(data))
+      }, 10000)
+  })
+  ```
+
+
+
+##### Promise 객체
+
+- 우린 그동안 XMLHttpRequest를 썼는데... python의 requests 같은 친구 `axios`
+
+++ beautify javascript
+
+XMLHttpRequest는.. 너무 불편하다.
+
+```javascript
+    const API_KEY = API_KEY
+    const URL = `http://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${keyword}`
+
+    const GiphyAPICall = new XMLHttpRequest()
+    GiphyAPICall.open('GET', URL)
+    GiphyAPICall.send()
+    GiphyAPICall.addEventListener('load', e => {
+        const parsedData = JSON.parse(e.target.response).data
+        console.log(parsedData)
+        parsedData.forEach( data => {
+            pushToDOM(data.images.original.url)
+        })
+    })
+```
+
+=> 이건 3단계를 거쳐야 한다.
+
+```javascript
+const APICall = new XMLHttpRequest() // 객체 만들고
+APICall.open('GET', URL) // URL로 요청을 
+APICall.send() // 보내고
+APICall.addEventListener('load', e => {  }) // 데이터가 load 되었을 때 뭘 한다...
+```
+
+~라고 일일이 명령을 해야하는데 너무 귀찮다. 그래서 axios를 사용한다.
+
+
+
+#### axios
+
+=> 사용법
+
+```javascript
+const URL = 'https://dog.ceo/api/breeds/image/random'
+axios.get(URL).then(function(){})
+```
+
+```javascript
+axios.get(URL)
+    .then(result => console.log(result.data.message))
+```
+
+
+
+
+
+
+
+#### 장고에 좋아요 달자
+
+방법 1) html에 바로 script 태그를 통해 자바스크립트를 넣자.
+
+이벤트리스너에 함수를 전달할 땐 `=>` 를 쓰지 않는다. 그런데 함수와 arrow function은 다른 점이 있다.
+
+-> this의 바인딩이 달라진다.
+
+button 태그에 무언가를 숨겨놓자. data-id
+
+```
+<button data-gogo="hello" data-name="cato" data-id="{{ article.pk }}" class='btn btn-primary' id='like_button'>좋아요</button>
+```
+
+이런 식으로 `data-` 하면 내가 원하는 이름을 줄 수 있다.
 

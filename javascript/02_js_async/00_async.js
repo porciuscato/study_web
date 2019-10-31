@@ -1,6 +1,6 @@
 const nothing = () => {
     setTimeout(nothing3, 500)
-    console.log('3초 끝남')
+    console.log('2초 끝남')
 }
 
 const nothing2 = () => {
@@ -13,6 +13,6 @@ const nothing3 = () => {
 console.log('start')
 // 시간을 멈춰두는 것. 파이썬은 sleep()
 // 첫번째 인자는 함수, 두 번째 인자는 ms
-setTimeout(nothing, 3000)
+setTimeout(nothing, 2000)
 setTimeout(nothing2, 1000)
 console.log('end')
