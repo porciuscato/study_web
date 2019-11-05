@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue ToDo</title>
+  <style>
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.3;
+  }
+  .red {
+   color: salmon; 
+  }
+  .yellow {
+    color: goldenrod;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Vue ToDo</h1>
+    <img v-bind:src="imgSrc" v-bind:height="height" style="display:block">
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+    <button @click="addTodo">+</button>
+    <button @click="deleteCompleted">완료목록 전체삭제</button>
+    <select v-model="status">
+      <!-- selected는 초기값을 주는 옵션 -->
+      <option value="all" selected>전체보기</option>
+      <option value="active">진행중</option>
+      <option value="completed">완료</option>
+    </select>
+    <!-- <p>{{ newTodo }}</p> -->
+    <ul>
+      <li :class="{completed: todo.completed}" v-for="todo in todoByStatus()" @click="check(todo)" :key="todo.id">
+      <!-- <li :class="{completed: todo.completed}" v-for="todo in todos" @click="check(todo)"> -->
+        <input type="checkbox" v-model="todo.completed">
+        {{ todo.content }}
+      </li>
+    </ul>
+    <!-- <div :style="{ color:activeColor, font-size: 30px }"> : 이건 CSS 문법 -->
+    <div :class="{ completed: toggleClass }" :style="{ color: activeColor, fontSize: fontsize + 'px' }">
+      html 스타일링 테스트
+    </div>
+  </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  // view 코드를 쓰려면 CDN은 항상 vue 코드 위에 있어야 한다.
+  // Vue Model
+  const app = new Vue({
+    el: "#app",
+    data: {
+      todos: [
+        { id: 1, content: 'JS 정리하기', completed: true },
+        { id: 2, content: 'Github 이쁘게 만들기', completed: false },
+        { id: 3, content: '코테 기출문제 풀기', completed: false },
+        { id: 4, content: '연락하기', completed: false },
+      ],
+      height: 300,
+      width: 100,
+      imgSrc: "http://i2.linkoooo.com/1903/20190330081116_fa6417b74eb35a742fdadf9973f7a1e8_vo1u.jpg",
+      red: 'red',
+      yellow: 'yellow',
+      newTodo: '입력',
+      activeColor: 'magenta',
+      fontsize: 30,
+      toggleClass: true,
+      status: 'all', // all은 다 보여주기, completed, active
+    },
+    methods: {
+      check(todo) {
+        todo.completed = !todo.completed
+      },
+      addTodo() {
+        if (this.newTodo.length != 0){
+          this.todos.push(
+          {
+            id: Date.now(), // 시간을 기점으로 구분한다.
+            content: this.newTodo,
+            completed: false,
+          }
+          )
+          this.newTodo = ''
+        }
+
+      },
+      deleteCompleted() {
+        const notCompleted = this.todos.filter(todo => {
+          // 남길 애들만 return 해주면 됨
+          return !todo.completed
+        })
+        this.todos = notCompleted
+      },
+      todoByStatus() {
+        // 진행 중인 일(active))
+        if (this.status === 'active') {
+          return this.todos.filter(todo => {return !todo.completed})
+        }
+        if (this.status === 'completed') {
+          return this.todos.filter(todo => {return todo.completed})
+        }
+        return this.todos
+      }
+    }
+  })
+</script>
+</body>
+</html>

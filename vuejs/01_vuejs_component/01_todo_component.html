@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head> 
+<body>
+  <div id="app">
+    <h1>Cato의 Todo-app</h1>
+    <todo-list category="취업준비"></todo-list>
+    <todo-list category="SSAFY"></todo-list>
+    <todo-list category="기타"></todo-list>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  
+  <script>
+    Vue.component('todo-list', {
+      template: `
+      <div>
+        <h2>{{ category }}</h2>
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+        <button @click="addTodo">+</button>
+        <li v-for="todo in todos" :key="todo.id">
+          <span>{{ todo.content }}</span>
+          <button @click="removeTodo(todo)">x</button>
+        </li>
+      </div>
+      `,
+      // // props: ['category'],
+      // props: {
+      //   // 데이터 유효성 검사를 할 수 있다.
+      //   category: String, // category는 js data type을 넣으면 됨
+      //   categoryId: Number,
+      //   // required: 
+      // },
+  
+      props: {
+        category: {
+          type: String,
+          required: true,
+          validator: function(value) {
+            if (value.length !== 0) {
+              return true
+            } else {
+              return false
+            }
+          }
+        }
+      },
+      // 변수를 지역스코프에 한정짓기 위해
+      data: function() {
+        return {
+          todos: [],
+          newTodo: '',
+        }
+      },
+      methods: {
+        addTodo: function () {
+          if(this.newTodo.length != 0){
+            this.todos.push({
+              id: Date.now(),
+              content: this.newTodo,
+              completed: false,
+            })
+            this.newTodo = ''
+          }
+        },
+        removeTodo: function (target) {
+          this.todos = this.todos.filter(function(todo) {
+            return todo.id !== target.id
+          })
+        },
+      }
+    })
+  </script>
+  
+  <script>
+    const app = new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+</html>

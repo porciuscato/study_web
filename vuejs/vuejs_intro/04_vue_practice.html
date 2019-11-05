@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+    <button @click="addTodo">+</button>
+    <button @click="casCade">와장창</button>
+    <span>{{ todos.length }}</span>
+    <li v-for="todo in todos" :key="todo.id">
+      <span>{{ todo.content }}</span>
+      <button @click="removeTodo(todo)">x</button>
+    </li>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const STORAGE_KEY = 'vue_Practice'
+    const pracStorage = {
+      save(todos) {
+        return localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      },
+      fetch() {
+        return localStorage.getItem(STORAGE_KEY) || []
+      },
+      remove(todos) {
+        return localStorage.removeItem()
+      },
+    }
+    let iter = 1
+    let Number = 10
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: pracStorage.fetch(),
+        newTodo: '',
+      },
+      methods: {
+        addTodo: function () {
+          if(this.newTodo.length != 0){
+            this.todos.push({
+              id: iter++,
+              content: this.newTodo,
+              completed: false,
+            })
+            this.newTodo = ''
+          }
+        },
+        // 이전에는 clearCompleted로 한번에 완료된 목록 삭제
+        // 이번에는 특정 todo를 삭제!
+        removeTodo: function (target) {
+          this.todos = this.todos.filter(function(todo) {
+            return todo.id !== target.id
+          })
+          // this.todos.splice(this.todos.indexOf(target), 1)
+        },
+        casCade() {
+          for(let i = 0; i< Number;i++){
+            this.addTodo()
+          }
+        }
+      },
+      watch: {
+        todos: {
+          handler() {
+            pracStorage.save(this.todos)
+          },
+          deep: true,
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
