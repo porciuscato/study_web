@@ -798,19 +798,372 @@ props: {
 }
 
 // 3. object로 옵션 추가
-props: {
-    category: {
-        type:String,
-        required:True
-        validator: function() {
-    		if (value.length !== 0){
-                return true
-            }
-			else {
-                return false
-			}
-		}
-    }
-}
+    props: {
+        category: {
+            type: String,
+                required: true,
+                    validator: function(value) {
+                        if (value.length !== 0) {
+                            return true
+                        } else {
+                            return false
+                        }
+                    }
+        }
+    }, 
 ```
+
+props는 집주인이 세입자에게 일정 권한을 주는 것과 마찬가지. 
+
+
+
+ Single File Component
+
+-> 한 번에 다 넣으면 복잡하므로 component를 나눠서 만들 것이다.
+
+그 파일의 확장자는 `.vue`
+
+자바스크립트는 여러 파일들간 데이터를 공유하는 것이 좀 어렵다.
+
+`웹팩` 으로 만들어줘야 하는데 이건 다음에 하는 걸로...
+
+
+
+`Vue-cli` : command line interface -> 브라우저로부터 탈출시켜 커맨드 라인에서 실행
+
+vue 프로젝트를 빠르게 만들기 위한 툴
+
+
+
+##### `npm` 의 패키지 관리 단위
+
+pip는 깔면 전역으로 깔림. 파이썬이 영향을 주는 프로그램에 다 적용 가능
+
+npm는 프로젝트별로 관리가 가능
+
+global 단위(어느 곳에서나 호출 가능)
+
+local 단위 혹은 프로젝트 단위에서도 가능
+
+=> 그래서 메시지가 좀 다르다. default는 프로젝트 단위
+
+글로벌로 설치하려면
+
+```
+$ npm install -g
+```
+
+```
+$ npm install -g @vue/cli
+```
+
+`yarn`은? -> npm을 쓰다가 너무 느리다보니 페이스북이 빡쳐서 새로 만듦. 
+
+그런데 npm이 yarn처럼 업그레이드를 해서 npm을 쓰는 것도 나쁘지 않음
+
+
+
+npm으로 프로젝트를 실행하기
+
+- 폴더를 잘 보고 만들 것
+
+```
+vue create todo-vue-cli
+```
+
+
+
+```d
+? Please pick a preset: (Use arrow keys)
+> default (babel, eslint)
+  Manually select features
+```
+
+옵션 2가지가 나옴 -> 1) default 와 2) 수동
+
+그냥 엔터 치자
+
+
+
+++ javascript browser check
+
+` https://caniuse.com/ `
+
+javascript를 쳐보면, IE에서는 js class를 쓸 수 없음
+
+그래서 html로 js를 실어보내도 iE에서는 볼 수 없었음 (chrome이 빨리 적용)
+
+이걸 babel이 도와줌
+
+사용자가 어떤 브라우저로 쓸 지 알 수 없음. 그래서 예전 js 버전으로 바꿔줄 필요가 있는데 이 번역을 babel이 해준다.
+
+
+
+package.json 을 잘 봐둬
+
+package-lock.json을 쓸 일은 없지만... 엄청나게 많은 패키지들은 뭔가? 의존성 목록들을 관리해주는 것
+
+-> 남의 걸 clone 받으면 dependencies를 확인하고 설치해야 한다.(npm install)
+
+=> 그러면 글로벌로 하는 게 낫지 않아? -> 아니다. 버전 관리가 어렵다. 
+
+
+
+장고는 패키지를 숨겨놓음
+
+npm은 프로젝트 혹은 로컬 단위가 defualt이기 때문에, 모든 모듈이 동일 폴더에 깔림. 
+
+
+
+이 상태로 서버를 돌릴 수 있다.
+
+```
+ $ cd todo-vue-cli
+ $ npm run serve
+```
+
+
+
+
+
+#### `.vue` 파일의 구조
+
+<template>
+
+<script>
+
+<style>
+
+
+
+
+
+- component를 만드는 이유는 각각이 같은 로직이지만, 각기 다른 요소를 지니므로
+
+
+
+vscode 설정 바꾸기
+
+f1 -> preferences ->   "[vue]": {"editor.tabSize": 2} 추가
+
+
+
+
+
+app.vue가 가장 중요. 이것도 하나의 component
+
+
+
+
+
+왜 div로 묶어주는가?  -> 여러 개의 노드가 있을 수 없기 때문. 그렇기 때문에 root 노드가 있어야 하고 이것을 div로 만든다.
+
+
+
+오브젝트 하에서 key와 value가 같은 이름이면 하나로 써도 상관 없다.
+
+
+
+
+
+한 파일에 만들었던 Vue를 Component로 어떻게 나눴는지 잘 볼 것
+
+
+
+
+
+다음 프로젝트는 youtube searcher
+
+`youtube api`
+
+
+
+서비스는 어떤 모습을 가질지에 대한 디자인이 있어야 함
+
+`Oven app`
+
+ https://ovenapp.io/ 
+
+`abode xd`
+
+ https://www.adobe.com/kr/products/xd.html 
+
+
+
+
+
+front end에서는 템플릿이 우선해서 간다!
+
+
+
+vue + tab
+
+하면
+
+! + tab과 같은 효과
+
+
+
+ https://joshua1988.github.io/vuejs/ 
+
+.vue 파일의 이름, app의 이름, APp.vue에서 불리는 이름을 모두 같이 만들어 나갈 것
+
+
+
+
+
+
+
+console.log() 할 때 에러가 발생
+
+그러므로 package.json -> rules에 "no-console": "off" 를 추가해준다.
+
+
+
+입력되는 값들은 잡아놓고 끝내는 게 아니라, search keyword로 넘어가서 API를 타고 결과를 뜨악 출력한다.
+
+
+
+
+
+특정 component가 데이터를 가지고 있는데 이걸 다른 component와 공유를 해야하는 문제가 발생
+
+-> 데이터의 저장소는 위쪽에 해놓아야...(데이터를 모든 방이 쓸 것이 때문에, 특정 component에만 있어선 안 된다. 부모의 방으로 보내야 한다. 그런데 데이터가 일방향으로만 전달될 수 밖에 없고 이는 props를 통해 간다.)
+
+자식이 부모에게 데이터를 전달하기 위해선 `emit`을 해야한다.
+
+아래쪽에서 데이터의 변경이 발생하면 부모에게 보내야 한다.
+
+```javascript
+this.$emit()
+```
+
+```javascript
+=> SearchBar
+<script>
+export default {
+  name: 'SearchBar',
+  methods: {
+    onInput(event) {
+      console.log(event.target.value)
+      // $emit 메소드는 자식 컴포넌트에서 부모 컴포넌트로 data를 올려줄 때
+      this.$emit('inputChange', event.target.value)
+    }
+  }
+}
+</script>
+```
+
+
+
+```html
+App.vue
+<template>
+  <div>
+    <h1>Youtube Searcher</h1>
+    <!-- 자식한테 무슨 일이 생겼다고 알려주는 것 -->
+    <SearchBar @inputChange="onInputChange"/>
+  </div>
+</template>
+```
+
+-> 자식 component에서 무슨 일이 발생했을 때, 알려주는 것
+
+```javascript
+<script>
+// 컴포넌트 등록할 땐 import를 하고
+import SearchBar from './components/SearchBar'
+
+export default {
+  name: 'App',
+  components: {
+    // SearchBar: SearchBar,
+    SearchBar,
+  },
+  methods: {
+    // emit된 이벤트가 들어온다. -> 위의 searchBar에서 이벤트가 바뀐 것을 알려준다.
+    onInputChange(inputValue) {
+      console.log(inputValue)
+    }
+  }
+}
+</script>
+```
+
+
+
+이제 
+
+
+
+ https://console.developers.google.com/project?hl=ko 
+
+
+
+
+
+
+
+ [https://www.googleapis.com](https://www.googleapis.com/)/서비스명/버전/기능
+
+->  [https://www.googleapis.com](https://www.googleapis.com/)/youtube/v3/search
+
+https://www.googleapis.com/)/youtube/v3/search?key=API_KEY&type=video&part=snippet&q=검색어
+
+
+
+axios의 결과는 promise. API_call은 언제 돌아올지 모르는 비동기함수이기 때문에 `.then`을 사용해라`
+
+
+
+API_KEY 숨기기
+
+vue cli가 숨겨준다
+
+vue cli secret
+
+.env.local을 만들고 반드시 접두사를 붙여야 함 `VUE_APP_`
+
+const API_KEY = process.env.VUE_APP_YOUTUBE_API_KEY
+
+
+
+시나리오 정리
+
+##### 1. onInputChange 메서드 호출
+
+##### 2. YoutubeAPI 요청
+
+##### 3. Youtube 응답 받고
+
+##### 4. Youtube Response 비디오 리스트를 App Component의 data로 저장
+
+##### 5. data가 업데이트되면, 컴포넌트가 템플릿을 다시 렌더링을 함(Vue가 해줌)
+
+##### 6. VideoList에서 변경된 결과를 보여줌
+
+
+
+자식 부모 `observer pattern` 을 공부하면 됨
+
+
+
+props를 내려줄 때 스탭
+
+1. 부모 컴포넌트에서 자식 컴포넌트의 template 태그에 v-bind를 통해 전달 -> props에 있다.
+
+   ```
+   props로 받는법
+   1) props: ['videos'],
+   2) props: {'videos': Array,},
+   3) props: {videos: {type:Array,}}
+   ```
+
+   
+
+arrowfunction : addEventlistener, methods
+
+
+
+`wappalyzer`
 
