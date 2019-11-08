@@ -863,7 +863,7 @@ $ npm install -g @vue/cli
 
 
 
-npm으로 프로젝트를 실행하기
+##### npm으로 프로젝트를 실행하기
 
 - 폴더를 잘 보고 만들 것
 
@@ -1017,6 +1017,24 @@ vue + tab
 console.log() 할 때 에러가 발생
 
 그러므로 package.json -> rules에 "no-console": "off" 를 추가해준다.
+
+```json
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {"no-console": "off"},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+```
+
+
 
 
 

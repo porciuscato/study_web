@@ -760,7 +760,18 @@ button 태그에 무언가를 숨겨놓자. data-id
 
 
 
+```javascript
+const students = {
+	john: 'computerL science',
+	ashley: 'law'
+}
+const school = {students}
+```
+
+=> school 하면 students가 키로, 그 안의 값이 value가 되어 저장된다.
 
 
 
 
+
+=> 그런데 get으로 만들어놔서 쉽게 데이터 조작이 가능해짐. 그래서 post로 바꾸는 걸로
