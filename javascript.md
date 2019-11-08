@@ -775,3 +775,15 @@ const school = {students}
 
 
 => 그런데 get으로 만들어놔서 쉽게 데이터 조작이 가능해짐. 그래서 post로 바꾸는 걸로
+
+
+
+
+
+
+
+브라우저위에서 돌 땐 항상 window라는 객체를 컨트롤 함
+
+그래서 window.document.print() 를 함
+
+그렇다면 node의 전역 객체는 무엇인가? `global`
