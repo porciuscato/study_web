@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     }
   </style> -->
 </head>
+
 <body>
   <div id="app">
     <h1>John의 Todo 앱</h1>
@@ -33,13 +35,15 @@
           <span>{{ todo.content }}</span>
           <button @click="removeTodo(todo.id)">x</button>
         </li>
+        <button @click="changeColor">toggle</button>
+        <p id="baro" :style="{color: colorVar}">빨강과 파랑을 섞으면 보라가 됩니다.</p>
       </div>
       `,
       props: {
         category: {
           type: String,
           required: true,
-          validator: function(value) {
+          validator: function (value) {
             if (value.length !== 0) {
               return true
             } else {
@@ -47,11 +51,12 @@
             }
           }
         }
-      }, 
-      data: function() {
+      },
+      data: function () {
         return {
           todos: [],
           newTodo: '',
+          colorVar: 'red',
         }
       },
       methods: {
@@ -62,13 +67,21 @@
               content: this.newTodo,
               completed: false,
             })
-          this.newTodo = ''
+            this.newTodo = ''
           }
         },
         removeTodo: function (todoId) {
-          this.todos = this.todos.filter((todo) =>{
+          this.todos = this.todos.filter((todo) => {
             return todo.id !== todoId
           })
+        },
+        changeColor: function(tag) {
+          if (this.colorVar == 'red'){
+            this.colorVar = 'blue'
+          }
+          else {
+            this.colorVar = 'red'
+          }
         },
       },
     })
@@ -80,4 +93,5 @@
     })
   </script>
 </body>
+
 </html>

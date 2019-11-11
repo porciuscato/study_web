@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <dogs />
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    Vue.component('dogs', {
+      template: `
+      <div class="dogs">
+        <select v-model="data">
+          <option v-for="opt in options" :value="opt">{{ opt }}</option>
+        </select>
+        <button @click="getImages">Get {{ data }} dogs!</button>
+        <div id="showRoom">
+        </div>
+      </div>
+      `,
+      data: function () {
+        return {
+          data: '',
+          options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          dogURL: 'https://dog.ceo/api/breeds/image/random/',
+          dogList: [],
+        }
+      },
+      methods: {
+        getImages: function () {
+          if (this.data !== '') {
+            requestURL = this.dogURL + this.data
+            axios.get(requestURL).then(function (res) {
+              document.querySelector('#showRoom').innerHTML = ''
+              this.dogList = res.data.message
+              for (let dog of this.dogList) {
+                const imgTag = document.createElement('img')
+                imgTag.src = dog
+                imgTag.widths = '30%'
+                document.querySelector('#showRoom').appendChild(imgTag)
+              }
+            })
+          }
+        },
+      }
+    })
+  </script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+    })
+  </script>
+
+
+</body>
+
+</html>

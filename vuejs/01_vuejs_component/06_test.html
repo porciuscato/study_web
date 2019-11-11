@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ipsum />
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    Vue.component('ipsum', {
+      template: `
+      <div class="ipsum">
+        <button @click="getText">Get Posts!</button>
+        <ul id="textArea">
+        </ul>
+      </div>
+      `,
+      data: function () {
+        return {
+          textURL: 'https://jsonplaceholder.typicode.com/posts',
+          textList: [],
+        }
+      },
+      methods: {
+        getText: function () {
+          if (this.data !== '') {
+            axios.get(this.textURL).then(function (res) {
+              document.querySelector('#textArea').innerHTML = ''
+              this.textList = res.data
+              // console.log(this.textList)
+              for (texts of textList) {
+                const tag = document.createElement('li')
+                tag.innerHTML = `<strong>${texts.title}</strong> - ${texts.body}`
+                document.querySelector('#textArea').appendChild(tag)
+              }
+            })
+          }
+        },
+      }
+    })
+  </script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+    })
+  </script>
+
+
+</body>
+
+</html>
