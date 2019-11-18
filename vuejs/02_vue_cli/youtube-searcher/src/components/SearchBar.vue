@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <input @input="onInput" type="text">
+  <div class="bg-search">
+    <input @change="onInput" type="text">
   </div>
 </template>
 
@@ -17,6 +17,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .bg-search {
+    background-color: bisque;
+  } 
 </style>

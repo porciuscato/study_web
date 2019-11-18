@@ -1,6 +1,14 @@
++ vscode 전체 정렬 -> `shift + alt + F`
+
+
+
 # 11월 4일
 
 vuejs를 왜 쓰는가?
+
+
+
+
 
 #### JS를 왜 쓰는가?
 
@@ -801,14 +809,14 @@ props: {
     props: {
         category: {
             type: String,
-                required: true,
-                    validator: function(value) {
-                        if (value.length !== 0) {
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
+            required: true,
+            validator: function(value) {
+                if (value.length !== 0) {
+                    return true
+                } else {
+                    return false
+                }
+            }
         }
     }, 
 ```
@@ -860,6 +868,19 @@ $ npm install -g @vue/cli
 `yarn`은? -> npm을 쓰다가 너무 느리다보니 페이스북이 빡쳐서 새로 만듦. 
 
 그런데 npm이 yarn처럼 업그레이드를 해서 npm을 쓰는 것도 나쁘지 않음
+
+
+
++ 프로젝트 실행하기? webpack?
+
+  ```
+  // vue init <template-name> <project-name>
+  vue init webpack my-project
+  ```
+
+  
+
+
 
 
 
@@ -1065,7 +1086,7 @@ export default {
     onInput(event) {
       console.log(event.target.value)
       // $emit 메소드는 자식 컴포넌트에서 부모 컴포넌트로 data를 올려줄 때
-      this.$emit('inputChange', event.target.value)
+      this.$emit('customEvent', event.target.value)
     }
   }
 }
@@ -1080,7 +1101,8 @@ App.vue
   <div>
     <h1>Youtube Searcher</h1>
     <!-- 자식한테 무슨 일이 생겼다고 알려주는 것 -->
-    <SearchBar @inputChange="onInputChange"/>
+      
+    <SearchBar @customEvent="onInputChange"/>
   </div>
 </template>
 ```
@@ -1118,7 +1140,11 @@ export default {
 
 
 
+- google youtube api documentation of property
 
+```
+https://developers.google.com/youtube/v3/guides/implementation/search?hl=ko
+```
 
 
 
@@ -1127,6 +1153,30 @@ export default {
 ->  [https://www.googleapis.com](https://www.googleapis.com/)/youtube/v3/search
 
 https://www.googleapis.com/)/youtube/v3/search?key=API_KEY&type=video&part=snippet&q=검색어
+
+
+
+#### axios를 vue에서 사용하기
+
+- axios를 설치하자
+
+```
+npm install --save axios
+```
+
+- 설치하고 실행한 components에서 axios를 불러오자
+
+```vue
+<script>
+    const axios = require('axios')
+    // 혹은
+    import axios from 'axios'
+</script>
+```
+
+
+
+
 
 
 
@@ -1184,4 +1234,90 @@ arrowfunction : addEventlistener, methods
 
 
 `wappalyzer`
+
+
+
+
+
+
+
+
+
+# Vue Project 만들기
+
+### 1. 프로젝트 실행하기
+
+- 
+
+
+
+
+
+
+
+
+
+# Vuex
+
+
+
+
+
+프로젝트...
+
+
+
+JWT json web token: json 웹 서버에게 인증된 유저임을 관리하는 것. 요새 많이 쓰고 모바일에서도 씀
+
+
+
+- Authentication
+- Todo 리스트
+- 서버와 프런트, 프런트 자체의 라우팅
+
+
+
+google api youtube 에 들어가면 내가 만든 프로젝트를 공유할 수 있음
+
+
+
+youtube adata API v3
+
+
+
+
+
+CSS 멕이기
+
+각각의 템플릿에만 CSS를 먹으려면? - `scoped` : 해당하는 템플릿에만 영향을 줄 수 있다.
+
+```html
+<style scoped>
+  .bg-color-search-bar {
+    background-color: bisque;
+  } 
+</style>
+```
+
+그래서 이렇게 이름을 복잡하게 만들 필요가 없음
+
+```html
+<style scoped>
+  div {
+    background-color: bisque;
+  } 
+</style>
+```
+
+
+
+항상 컴포넌트를 구조화할 때 할 것은?
+
+싱글 파일 컴포넌트 -> 파일을 만든다.
+
+
+
+component 이름과 비슷하게 만드는 것이 좋다.
+
+
 
