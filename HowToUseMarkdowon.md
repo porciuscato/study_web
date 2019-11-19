@@ -10,6 +10,8 @@
 
 `#` 를 사용. 1~ 6개까지 가능
 
+<예시>
+
 ```
 # H1
 ## H2
@@ -38,6 +40,8 @@
 ### 1.2 Block Quote
 
 `>` 블럭 인용문자를 사용. `#` 와는 달리 제한이 없다. 원하는 만큼 쓸 수 있다.
+
+<예시>
 
 ```
 > 1
@@ -68,6 +72,8 @@
 
 숫자와 점을 사용한다.
 
+<예시>
+
 ```
 1. 첫번째
 2. 두번째
@@ -85,6 +91,8 @@
 #### 1.3.2 순서없는 목록
 
 `-` , `*`, `+` 를 사용. 세 가지를 섞어 써도 결과는 같다.
+
+<예시>
 
 ```
 - 하나
@@ -120,6 +128,8 @@
 
 HTML 태그를 그대로 적용할 수 있다. 
 
+<예시>
+
 ```
 <p><strong>strong</strong></p>
 <p><small>small</small></p>
@@ -133,12 +143,13 @@ HTML 태그를 그대로 적용할 수 있다.
 <p><small>small</small></p>
 <p><sup>sup</sup></p>
 <p><sub>sub</sub></p>
-
 ---
 
 pre 태그는 입력한 그대로 보여준다.
 
 code 태그는 안에 있는 내용이 코드임을 알려준다.
+
+<예시>
 
 ```
 <pre> 
@@ -164,6 +175,8 @@ window.document.console.log('console log')
 
 아래 모두 수평선을 만든다. asterisk 혹은 dash를 3개 이상 연속으로 쓰면 수평선이 만들어진다.
 
+<예시>
+
 ```
 ***
 ---
@@ -174,12 +187,70 @@ window.document.console.log('console log')
 <hr/>
 ```
 
+<결과>
+
 - - - - - - -
 <hr/>
-
 => HTML 태그가 바로 적용이 되기 때문에 `<hr/>`도 수평선을 만든다.
 
 
 
 ### 1.6 링크
 
+- 자동연결 - URL 혹은 이메일에 바로 링크를 넣을 수 있다.
+
+<예시>
+
+```
+<https://www.google.com>
+<mpcato@naver.com>
+```
+
+<결과>
+
+<https://www.google.com>
+<mpcato@naver.com>
+
+
+
+
+
+
+
+
+
+[title](./mbti/index.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p id="here"> hello </p>
+
+[#here]: https://www.google.com	""google""

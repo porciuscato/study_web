@@ -1321,3 +1321,400 @@ component 이름과 비슷하게 만드는 것이 좋다.
 
 
 
+# 11월 19일
+
+### Vue Router
+
+### Vuex
+
+### JWT json web token
+
+서비스는 나누되 언어스택은 싱글로 가자는 것이 흐름
+
+빌드업 할 땐 nodejs를 사용. 
+
+
+
+1. `todo-back`을 만들고 `vue create todo-front` 를 만들어서 `todo-front` 폴더를 만들자
+
++ GUI 사용하기
+
+  `vue ui`를 입력한다.
+
+  폴더 가져오기에서 `todo-front`를 가져온다.
+
+  npm install 뿐 아니라 GUI로도 vue를 관리할 수 있다.
+
+  이전에는 `npm install vue-router` 이렇게 했어야
+
+- 플러그인 추가(미들웨어)
+
+
+
+SPA의 극단적인 단점 2가지 single page application
+
+장점들이 많으나(로드 없이)
+
+- history 관리가 안 된다. (사용자의 액션을 트래킹할 수 없음)
+
+  `window.history.back`
+
+- `SEO` 에 취약하다. -> `search engine optimization` 검색 엔진 최적화. 
+
+  - 네이버나 구글이 뭘 하고 있나? 전세계 웹을 돌며 정보를 수집하는 `spider` 를 뿌려서 크롤링을 해서 데이터 베이스에 가져옴. 그리고 해당 검색어에 해당하는 데이터베이스에 있는 자료 결과를 보여줌. 
+  - 그래서 1) 데이터를 잘 끌어와서 2) 검색어와 링크를 해주고 3) 우선순위에 따라 보여준다.
+
+  - SEO 는 기본적으로 HTML 페이지를 기준으로 정해진다.
+    - 멀리캠퍼스와 패스트캠퍼스의 차이. 이탈률이 엄청 달라짐.
+  - 스파이더는 맨처음 들어오는 페이지에 대해서 검증을 함. 그래서 SPA들은 스파이더들에게 취약했음. SPA는 실행 이후 많이 로드되기 때문. 그래서 예전엔 `쉬뱅`을 많이 썼음 `hash bang` 
+    - 쉬뱅은 히스토리에 저장이 됨. 쉬뱅을 사용하면 가능. 그런데 너무 구린 것 같다보니...
+    - 히스토리에 저장할 수 있는 친구를 만들어내자 -> js router. SPA에서 라우팅이 가능하도록 만든 것
+
+> linux 재단, 모질라 재단이 굉장히 가중치가 높음 -> 이걸 구글이 포착해서 링크가 올라감
+
+
+
+
+
+
+
+`vue add router` 하고 router를 추가한다.
+
+
+
+main.js에 보면 router가 추가된 것을 확인할 수 있다.
+
+
+
+그리고 run serve를 하면 히스토리가 저장되어, 뒤로가기 버튼을 누르면 history가 저장된 상태임을 알 수 있음!
+
+
+
+
+
+우리가 만들려는 프로젝트는
+
+1. 프론트와 백. Vue and Django
+   - Auth(회원가입 로그인)
+   - Todo
+
+
+
+Vue로 로그인 기능을 만든다?
+
+`Login.vue`을 만들자. 
+
+그리고 어떻게 등록을 하는가?
+
+장고처럼 urls를 해줘야. 그건 vue에선 `index.js` -> import 해주고 routes에 object를 추가해준다.
+
+```javascript
+import Login from '../views/Login'
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'about',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  }
+]
+```
+
+이렇게 등록된 컴포넌트를 app.vue에게 알려준다.
+
+router-link가 만들어준다!
+
+
+
+```html
+<template>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">로그인</router-link> |
+      <a href="/login">로그인 a태그</a>
+    </div>
+    <router-view/>
+  </div>
+</template>
+```
+
+=> router-link 태그를 사용하면 링크를 눌렀을 때 페이지 로드가 발생하지 않지만 a 태그로 만들면 페이지가 로드된다.
+
+
+
+`router-view`는 무엇인가
+
+rounter-link에 의해 변하는 것은 router-view로 보여준다는 것
+
+
+
+라우팅을 원한다면 index.js 에 등록을 하고 나타낼 component에 적용을 해주면 됨
+
+
+
+bootstrap을 쓰려면 Vuetify 을  사용해야 함
+
+[링크]( https://vuetifyjs.com/ko/introduction/why-vuetify )
+
+\<v-btn> 등을 사용하면 됨
+
+하지만 지금은 bootstrap을 쓰자. CDN에서 CSS만 따오자. js는 jquery 를 쓰는데 이것도 라이브러리라 충돌할 가능성이 있다.
+
+
+
+
+
+우리는 POST로 자료를 보낼 때 form 태그를 쓸 필요가 없다. 
+
+
+
+components의 구조를 생각하라
+
+Input
+
+python -m venv todo-venv
+
+source todo-venv/Scripts/activate
+
+
+
+
+
+백엔드 구성
+
+- todo 만을 위한 venv 설정
+
+`python -m venv todo-venv`
+
+`source todo-venv/Scripts/activate`
+
+
+
+- package 설치
+
+```
+$ pip install djangorestframework
+$ pip install djangorestframework-jwt
+$ pip install django-cors-headers
+```
+
+settings.py 에 추가하려면?
+
+각 github 페이지를  참고할 것
+
+
+
+```
+INSTALLED_APPS = [
+  ...
+  'todos',
+  'corsheaders',
+  'rest_framework',
+  ...
+]
+```
+
+```
+REST_FRAMEWORK = {
+JWT_AUTH = {
+```
+
+추가할 것
+
+
+
+
+
+`CORS`?
+
+다른 도메인에서 온 것을 허용할지 말지를 결정하는 것
+
+배포한 서버의 호스트만, vuejs 서버만 작동하도록 만든 것. 이거 외에 다른 것이 들어오면 안되게 만드는 것 -> 보안을 위해서
+
+`CORS_ORIGIN_ALLOW_ALL = True`
+
+일단은 이렇게 전부 True로 만든다.
+
+원래는 화이트리스트로 관리하지만 일단은....
+
+
+
+JWT는 놀이공원의 자유이용권과 같은 것
+
+[Velopert의 정리자료]( https://velopert.com/2350 )
+
+장고 AUTH는 세션 기반
+
+세션을 통해서 서버가 정보를 트래킹하는 것의 장단점이 있다.
+
+- 장점은, 서버에 이 정보가 저장되어 있기 때문에 굉장히 빠르다. 어떤 사람이 오더라도 무상태성을 완전히 보완할 수 있을 정도
+- 그러나 단점도 있음. 세션은 내부... 브라우저에서 온 쿠키를 기반으로 세션 ID를 통해 로그인 여부를 트래킹 함 -> 이때 메모리에 떠있는 세션은, 만약 100만명이라면 100만명의 모든 정보를 가지고 있어야 함
+  - 또 하나. 세션은 쿠키 베이스라서 다른 디바이스와 쉐어 할 수가 없다. 즉 멀티 디바이스 환경에서는 이런 세션 기반이 어렵다. 마치 세션처럼 관리하기가 어려워서... 
+- 그러면 어떻게 하냐? 쿠키를 기반으로 모든 로그인된 정보를 세션에 저장했던 부하적인 요소(많은 메모리 필요) -> 쿠키를 통해서 서버가 만들어졌던 걸 판단하는 게 아니라, 로그인된 사람이라는 걸 알게하는 파일을 가지고 있게 하고, 자기 요청에다가 함께 보내도록 하는 것. 이 중 살아남은 것이 JWT -> 이젠 더이상 서버가 가지고 있지 않는다.
+  + auth.login()은 이 정보를 세션에 저장시키는 것.
+- JWT는 토큰 안에 모든 것을 다 담아넣는다. 다른 세션에 대한 정보를 전달하지 않더라도....
+
+
+
+- 세션에는 유저의 PK를 담는데... 이제는 세션을 담지 않고 인증되었다는 토큰을 보내는 것. 서버가 토큰의 진위를 확인하고 응답을 보내줌.
+
+=> 서버는 토큰으로만 확인하기 때문에 다시 stateless로 돌아간 것과 마찬가지. 이전에는 세션이 회원에 대한 모든 정보를 가지고 있었기 때문에... 
+
+[홈페이지]( https://jwt.io/ )
+
+JWT은 xxxxx.yyyyy.zzzzz로 적혀있다.
+
+JWT는 모든 정보를 다 가지고 있다. 
+
+
+
+SHA1은 git.
+
+sha256은 압축되어있는 형태. 디지털 signature 이걸 풀기 위해서는 시크릿으로.
+
+Base64 인코딩
+
+
+
+토큰 발행
+
+```python
+from rest_framework_jwt.views import obtain_jwt_token
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api-token-auth/', obtain_jwt_token),
+]
+```
+
+
+
+vue가 세션을 관리한다.
+
+
+
+로그인 화면 만들어보자
+
+
+
+vue에서 로그인하면 장고로 보낼 수 있어야 함
+
+
+
+axios로 요청을 보낸다.
+
+`npm i axios`
+
+추가한다.
+
+
+
+이제 이 토큰 값을 vue에게 담기고, 그 이후에는 이 JWT를 실려 보내도록 만들어야 함
+
+그래서 vue-session을 깔아야 함
+
+`npm i vue-session`
+
+main.js 에 
+
+<pre>
+    import VueSession from 'vue-session'
+    `Vue.use(VueSession)` 을 추가시켜줌
+</pre>
+
+
+
+[vue-session]( https://www.npmjs.com/package/vue-session )
+
+
+
+
+
+++ vueapp의 lifecycle
+
+
+
+session에 데이터가 있으면... 매 세션이 있는지 확인하는 것. vue가 불려오기도 전에 로그인이 되어있는지 확인?
+
+mount가 js를 html에 꽝 하고 붙이는 과정
+
+`.$mount('#app')`
+
+왜 사용자가 보이는 게 변할까? 데이터의 변경이 있을 경우 rerender 를 하기 때문
+
+렌더의 과정
+
+beforeCreated,
+
+Mount
+
+Mounted -> 데이터가  보이는 시점
+
+
+
+총 4개의 체크 포인트가 있다 -> 생성 마운트 업데이트 파괴 : 이 4개의 앞과 전후로 있다.
+
+거의 쓰게 될 것은 mount. 보이기 직전이기 때문
+
+before mount 혹은 created 등 보이기 직전에 가장 많음
+
+mounted
+
+특정 지점에 훅을 만들 수 있음. 
+
+
+
+vue 인스턴스가 만들어지고 보이기 전에 
+
+화면에 띠우기 직전에, 
+
+
+
+이렇게 만들어놨는데, 언제마다 해야되는가?
+
+
+
+
+
+<pre>
+##8개의 live cycle hook
+
+
+mounted() {
+
+}
+
+
+
+
+
+해당하는 유저가 todo를 생성하고 
+
+
+
+JWT이 안 보내지면 인증이 안 됨
+
+postman으로 보낼 때
+
+key {id, user, title, Authorization}
+
+할 때 {1, 1, 제목, JWT jwt토큰} 보내주면 됨
+
+
+
+역량 자원을 충분히 활용할 것
