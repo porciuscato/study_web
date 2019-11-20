@@ -1701,6 +1701,8 @@ mounted() {
 
 
 
+토큰을 얻기 위해 우리가 따로 JWT 토큰을 만드는  URL을 만들었다.
+
 
 
 해당하는 유저가 todo를 생성하고 
@@ -1718,3 +1720,65 @@ key {id, user, title, Authorization}
 
 
 역량 자원을 충분히 활용할 것
+
+
+
+
+
+장고의 views.py
+
+모든 todo를 보여주는 것이 아니다. 자기만 만든 것을 봐야하기 때문에...
+
+우리가 post를 보내면 user의 ID가 함께 간다. 해당하는 유저가 가지고 있는 것만 가지고 와야 함
+
+
+
+user와 post와 1대 N 관계. Todo set을 뽑아주는 serializers를 가져와야 한다.
+
+
+
+```python
+from rest_framework import serializers
+from .models import Todo
+from django.contrib.auth import get_user_model
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ('id', 'user', 'title', 'completed')
+
+class UserSerializer(serializers.ModelSerializer):
+    todo_set = TodoSerializer(many=True)
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'username', 'todo_set',)
+```
+
+
+
+
+
+jwt를 decode 하기 위해
+
+`npm i jwt-decode`
+
+
+
+
+
+input을 하나로 만들기
+
+@submit.prevent="함수" : 원래 하던 행위를 멈추고 뒤에 함수만 실행함
+
+
+
+장고 하나로 하면 더 편한 것 처럼 느껴지는데?
+
+아니다. 서버 코드 하나로 모바일 뿐 아니라 다양한 디바이스의 앱도 개발이 가능하다!
+
+react는 js를 작성하면 거의 바로 모바일 앱으로 전환이 가능하긴 한데, 요새는 vue도 `vue native` 라는 프로젝트를 진행 중
+
+1기 프로젝트 중 하나
+
+[낙낙]( https://client-knocknock.firebaseapp.com/ )
+
