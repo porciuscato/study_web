@@ -255,7 +255,7 @@ window.document.console.log('console log')
 
 <결과>
 
-[vuejs](./vuejs.md#Vue.js)
+[vuejs](./javascript.md#javascript)
 
 
 
