@@ -2,6 +2,10 @@
 
 ++ 김용균
 
+
+
+# javascript
+
 ctrol + shift + j 로 자바스크립트를 컨트롤
 
 ```javascript
@@ -778,7 +782,6 @@ const school = {students}
 
 
 
-# javascript
 
 
 
