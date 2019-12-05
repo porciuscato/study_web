@@ -59,6 +59,7 @@
 > > 2
 > > > 3
 > > > > 4
+> > > >
 > > > > > 5
 > > > > > > 6
 > > > > > >
@@ -197,7 +198,7 @@ window.document.console.log('console log')
 
 ### 1.6 링크
 
-- 자동연결 - URL 혹은 이메일에 바로 링크를 넣을 수 있다.
+- 자동연결 - URL 혹은 이메일에 바로 링크를 넣을 수 있다. `<링크>`
 
 <예시>
 
@@ -213,44 +214,43 @@ window.document.console.log('console log')
 
 
 
+- 인라인 링크: `[p](링크)`
 
+<예시>
 
+```
+[title](./mbti/index.html)
+[vuejs](./vuejs.md)
+```
 
-
-
+<결과>
 
 [title](./mbti/index.html)
 
+[vuejs](./vuejs.md)
 
 
 
+- 참조링크
+
+<예시>
+
+```
+[link keyword][id]
+[id]: URL "Optional Title here"
+
+Link: [Google][여기로]
+[여기로]: https://google.com "Go google"
+```
+
+<결과>
+
+Link: [Google][여기로]
+
+[여기로]: https://google.com "Go google"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p id="here"> hello </p>
-
-[#here]: https://www.google.com	""google""
+> 인라인 링크는 대괄호 옆 소괄호 안에 직접 URL 링크를 거는 방식이다.
+>
+> 반면 참조링크는 마치 링크를 변수화 한 것처럼 대괄호 옆 대괄호 안에 연결할 링크를 변수로써 설정하는 것이다. 변수의 링크를 정의할 땐 사용할 곳의 상하 모두 가능하다.
