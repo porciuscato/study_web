@@ -214,7 +214,7 @@ window.document.console.log('console log')
 
 
 
-- 인라인 링크: `[p](링크)`
+- 인라인 링크: `[p](링크)` -> 다른 파일로 이동할 때
 
 <예시>
 
@@ -228,6 +228,34 @@ window.document.console.log('console log')
 [title](./mbti/index.html)
 
 [vuejs](./vuejs.md)
+
+
+
+- 인라인링크 -> 동일 파일 내 특정 태그로 이동하고 싶을 때
+
+<예시>
+
+```
+[제목](#마크다운-작성법)
+```
+
+<결과>
+
+[제목](#마크다운-작성법)
+
+
+
+- 인라인링크 -> 다른 파일 내 특정 태그로 이동하고 싶을때
+
+<예시>
+
+```
+[vuejs](./vuejs.md#Vue.js)
+```
+
+<결과>
+
+[vuejs](./vuejs.md#Vue.js)
 
 
 
